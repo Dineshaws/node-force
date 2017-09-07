@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Node Js"
+  },
+  {
+    "id": 2,
+    "name": "Angular Js"
+  },
+  {
+    "id": 3,
+    "name": "React Js"
+  },
+  {
+    "id": 4,
+    "name": "Express Js"
+  },
+  {
+    "id": 5,
+    "name": "TypeScript"
+  }
+]
