@@ -11,7 +11,7 @@ App.set('port', port);
 
 const server = http.createServer(App);
 server.listen(port => {
-  console.log('Express server listening on '+App.get('port'));
+  console.log(`Express server listening on ${App.get('port')}`);
 });
 server.on('error', onError);
 server.on('listening', onListening);
