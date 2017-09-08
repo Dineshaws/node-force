@@ -7,12 +7,11 @@ import App from './App';
 debug('ts-express:server');
 
 const port = normalizePort(process.env.PORT || 8080);
+console.log("port is "+port)
 App.set('port', port);
 
 const server = http.createServer(App);
-server.listen(port => {
-  console.log(`Express server listening on ${App.get('port')}`);
-});
+server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 

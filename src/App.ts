@@ -3,7 +3,9 @@ import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 
+
 import SampleRouter from './routes/SampleRouter';
+import OpportunityRouter from './routes/OpportunityRouter';
 
 // Creates and configures an ExpressJS web server.
 class App {
@@ -33,12 +35,12 @@ class App {
     let router = express.Router();
     // placeholder route handler
     router.get('/', (req, res, next) => {
-      res.json({
-        message: 'Hello World!'
-      });
+      console.log("hi this is index page");
+      res.send('Hello World! jsforce used in this app');
     });
     this.express.use('/', router);
     this.express.use('/api/v1/samples', SampleRouter);
+    this.express.use('/api/v1/opportunities', OpportunityRouter);
   }
 
 }
