@@ -1,4 +1,4 @@
-# Node-Force RESTful API With Node, TypeScript and 
+# Node-Force RESTful API With Node, TypeScript and JSForce
 
 ## Want to learn jsforce 
 
@@ -6,7 +6,7 @@ Check out the [JSForce](https://jsforce.github.io/).
 
 ## Want to use this project?
 
-1. Fork/Clone
+1. Clone
 1. Install dependencies - `npm install`
 1. Compile - `gulp scripts`
 1. Compile assets - `gulp assets`
