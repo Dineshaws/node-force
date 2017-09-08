@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "test": "mocha --reporter spec --compilers ts:ts-node/register 'test/**/*.test.ts'",
-    "postinstall": "npm install typescript && gulp"
+    "postinstall": "gulp default"
   },
   "engines": {
     "node": "8.2.1"
@@ -39,6 +39,7 @@
     "jsforce": "^1.8.0",
     "morgan": "^1.7.0",
     "gulp": "^3.9.1",
-    "gulp-typescript": "^3.1.1"
+    "gulp-typescript": "^3.1.1",
+    "typescript": "^2.0.6"
   }
 }
