@@ -91,12 +91,8 @@ body {
 .topContent {
 	height: 90px;
 	width: 152px;
-	position: absolute;
-	right: 1%;
+	position: relative;
 	top: 5%;
-	margin: -130px 0 0 -166px;
-	color: #444;
-	font: normal 12px/14px Arial, Helvetica, Sans-serif;
 	margin: 0 auto 30px;
 	overflow: hidden;
 }
@@ -266,6 +262,9 @@ footer#main {
 	padding-bottom: 0
 }
 
+#bt_show {
+	display: none;  
+}
 
 .bl_button {
     background: #0392ff;
@@ -275,6 +274,7 @@ footer#main {
     height: 35px; /* height of your button image */
     width: 100px; /* width of your button image */
 	float: right;
+	margin-left: 10px;
 }
 
 .button_loading {

@@ -27,7 +27,6 @@ public createConnection() {
     _this.currentConnection = new jsforce.Connection({
             // you can change loginUrl to connect to sandbox or prerelease env.
              //loginUrl : process.env.SF_LOGIN_SERVER,
-             //proxyUrl : "https://node-salesforce-proxy.herokuapp.com/proxy/"
         });
         console.log("process.env.SF_USERNAME ",process.env.SF_USERNAME);
         console.log("process.env.SF_PASSWORD ",process.env.SF_PASSWORD);

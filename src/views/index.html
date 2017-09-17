@@ -9,23 +9,37 @@
     <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
 </head>
 <body>
+
+<div id="content">
+
+	<div class="topContent">
+          <fieldset class="">
+		    <br>
+            <!--<h2>Add MetaData</h2>-->
+          </fieldset>
+        </div>
+        
+</div>
+
+
 <!--<div class="notify"><span class="symbol icon-info"></span> A kind of a notice box !</div> -->
-<div class="notify notify-red"><span class="symbol icon-error"></span> Error while adding metadata!</div> 
-<div class="notify notify-green"><span class="symbol icon-tick"></span> Successfully added!</div> 
+<div class="notify notify-red"><span class="symbol icon-error"></span></div> 
+<div class="notify notify-green"><span class="symbol icon-tick"></span> </div> 
 <!--<div class="notify notify-yellow"><span class="symbol icon-excl"></span> A warning message</div>-->
 <form action="javascript:void(0)" method="post" class="box metadata" id="metaForm">
 	<fieldset class="boxBody">
 	<!--<label for="fullName">FullName</label>-->
-	  <input type="text" tabindex="1" placeholder="Enter fullName" name="fullName" id="fullName" required>
+	  <input type="text" tabindex="1" placeholder="Enter fullName" name="fullName" id="fullName">
     <!--<label for="label">Label</label>-->
-	  <input type="text" tabindex="1" placeholder="Enter label" name="label" id="label" required>
+	  <input type="text" tabindex="1" placeholder="Enter label" name="label" id="label">
   	<!--<label for="description">Description</label>-->
-	  <input type="text" tabindex="1" placeholder="Enter description" name="description" id="description" required>
+	  <input type="text" tabindex="1" placeholder="Enter description" name="description" id="description">
  	<!--<label for="url">URL</label>-->
-	  <input type="text" tabindex="2" placeholder="Enter URL" name="url" id="url" required>
+	  <input type="text" tabindex="2" placeholder="Enter URL" name="url" id="url">
 	</fieldset>
 	<footer>
-      <button type="submit" id="bt_pagamento" class="bl_button" title="ADD METADATA"><span>Add</span></button>
+      <button type="submit" id="bt_pagamento" class="bl_button" title="Add metadata"><span>Add</span></button>
+      <button type="button" id="bt_show" class="bl_button" title="Show meta on dashboard"><span>Show</span></button>
 	  <!--<input type="button" class="btnLogin" value="Add" tabindex="1" onclick="addMetaData()">-->
 	</footer>
 
@@ -77,30 +91,54 @@ $(document).ready(function() {
             body: JSON.stringify(form)
         })
         .then(function(response) {
-             console.log(response);
+            console.log(response);
             return response.json()
-            /*if (response.status >= 400) {
-                console.log("ERROR "+JSON.stringify(response));
-                //throw new Error("Bad response from server");
-                $("#bt_pagamento").removeClass('button_loading');
-                $('.notify-red').show();
-
-            } else {
-                return response.json();
-            }*/
             
         })
         .then(function(data) {
             console.log(data);
-            if(data.type && data.type =="error") {
-                $("#bt_pagamento").removeClass('button_loading');
+            $("#bt_pagamento").removeClass('button_loading');
+            if(data.type && data.type == "error") {
+                $('.notify-red span').html(data.message);
                 $('.notify-red').show();
             } else {
-                $("#bt_pagamento").removeClass('button_loading');
+                $('.notify-green span').html('Meta Added Successfully! Click on <b>show</b> button to show it on dashboard.');
                 $('.notify-green').show();
+                $('#bt_show').show();
+                $("#bt_pagamento").prop('disabled', true).css("cursor", "default").fadeTo(500,0.2);
             }
         });
     });
+
+    $("#bt_show").click(function () {
+        $(this).addClass('button_loading');
+        $('.notify-red').hide();
+        $('.notify-green').hide();
+        console.log("bt_show  clicked ");
+        fetch("/api/v1/metadata/show", { 
+            method: 'GET'
+        })
+        .then(function(response) {
+            console.log(response);
+            return response.json()
+            
+        })
+        .then(function(data) {
+            console.log(data);
+            $('#metaForm')[0].reset(); // reset button
+            $("#bt_show").removeClass('button_loading');
+            $("#bt_pagamento").prop('disabled', false).css("cursor", "pointer").fadeTo(500,1);
+            if(data.type && data.type == "error") {
+                $('.notify-red span').html(data.message);
+                $('.notify-red').show();
+            } else {
+                $('.notify-green span').html('Meta is successfully added on dashboard!');
+                $('.notify-green').show();
+                $('#bt_show').hide();
+            }
+        });
+    })
+
 });
 
 </script>

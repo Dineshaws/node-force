@@ -20,6 +20,7 @@ export class MetaDataRouter {
      */
     init() {
         this.router.post('/', this.metadataCreate);
+        this.router.get('/show', this.showMetaData);
     }
 
     /**
@@ -118,7 +119,23 @@ export class MetaDataRouter {
                     console.log("no tab data  -- ", JSON.stringify(metadata));
                     callback(null);
                 }
-            },
+            }
+        ], function (error) {
+            if (error) {
+                res.status(400).send({type:"error", message: 'Error while adding metadata.', error: error });
+            } else {
+                res.status(200).send({ type:"success",message: 'Successfully added.'});
+            }
+        });
+    }
+
+
+    /**
+     * show meta data in dashboard forcefully
+     */
+    showMetaData(req, res, next) {
+        console.log("metadata show  api call here", req.body);
+        async.waterfall([
             // fetch customApp data here 4th
             function (callback) {
                 var fullNames = ['standard__Sales'];
@@ -151,9 +168,9 @@ export class MetaDataRouter {
             }
         ], function (error) {
             if (error) {
-                res.status(400).send({type:"error", message: 'Error while adding metadata.', error: error });
+                res.status(400).send({type:"error", message: 'Error while showing metadata.', error: error });
             } else {
-                res.status(200).send({ type:"success",message: 'Successfully added.'});
+                res.status(200).send({ type:"success",message: 'Successfully showing.'});
             }
         });
     }
