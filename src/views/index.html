@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+	<title>Node-JSForce</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js" ></script>
+	<link rel="stylesheet" type="text/css" href="css/structure.css">
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+</head>
+<body>
+<!--<div class="notify"><span class="symbol icon-info"></span> A kind of a notice box !</div> -->
+<div class="notify notify-red"><span class="symbol icon-error"></span> Error while adding metadata!</div> 
+<div class="notify notify-green"><span class="symbol icon-tick"></span> Successfully added!</div> 
+<!--<div class="notify notify-yellow"><span class="symbol icon-excl"></span> A warning message</div>-->
+<form action="javascript:void(0)" method="post" class="box metadata" id="metaForm">
+	<fieldset class="boxBody">
+	<!--<label for="fullName">FullName</label>-->
+	  <input type="text" tabindex="1" placeholder="Enter fullName" name="fullName" id="fullName" required>
+    <!--<label for="label">Label</label>-->
+	  <input type="text" tabindex="1" placeholder="Enter label" name="label" id="label" required>
+  	<!--<label for="description">Description</label>-->
+	  <input type="text" tabindex="1" placeholder="Enter description" name="description" id="description" required>
+ 	<!--<label for="url">URL</label>-->
+	  <input type="text" tabindex="2" placeholder="Enter URL" name="url" id="url" required>
+	</fieldset>
+	<footer>
+      <button type="submit" id="bt_pagamento" class="bl_button" title="ADD METADATA"><span>Add</span></button>
+	  <!--<input type="button" class="btnLogin" value="Add" tabindex="1" onclick="addMetaData()">-->
+	</footer>
+
+</form>
+<script>
+$(document).ready(function() {
+
+    jQuery.validator.addMethod("noSpace", function(value, element) { 
+        return value.indexOf(" ") < 0 && value != ""; 
+    }, "Space are not allowed");
+
+    $("#metaForm").validate({
+        errorLabelContainer: $("#error"),
+        rules: {
+            fullName: { required: true, noSpace: true },
+            label: { required: true },
+            description: { required: true },
+            url: { required: true, url:true }
+        },
+        messages: {
+            fullName: { required: 'Please enter FullName' },
+            label: { required: 'Please enter label' },
+            description: { required: 'Please enter description' },
+            url: { required: 'Please enter url' }
+        }
+    });
+
+
+    $("#bt_pagamento").click(function () {
+        var valid = $("#metaForm").valid();
+        if(!valid) {
+            return false;
+        }
+        $(this).addClass('button_loading');
+        $('.notify-red').hide();
+        $('.notify-green').hide();
+        var form = new Object();
+        form["fullName"] = $("#fullName").val();
+        form["label"] = $("#label").val();
+        form["description"] = $("#description").val();
+        form["url"] = $("#url").val();
+        console.log(form);
+        fetch("/api/v1/metadata", { 
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }, 
+            body: JSON.stringify(form)
+        })
+        .then(function(response) {
+             console.log(response);
+            return response.json()
+            /*if (response.status >= 400) {
+                console.log("ERROR "+JSON.stringify(response));
+                //throw new Error("Bad response from server");
+                $("#bt_pagamento").removeClass('button_loading');
+                $('.notify-red').show();
+
+            } else {
+                return response.json();
+            }*/
+            
+        })
+        .then(function(data) {
+            console.log(data);
+            if(data.type && data.type =="error") {
+                $("#bt_pagamento").removeClass('button_loading');
+                $('.notify-red').show();
+            } else {
+                $("#bt_pagamento").removeClass('button_loading');
+                $('.notify-green').show();
+            }
+        });
+    });
+});
+
+</script>
+</body>
+</html>

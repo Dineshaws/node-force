@@ -28,10 +28,10 @@ public createConnection() {
             // you can change loginUrl to connect to sandbox or prerelease env.
             // loginUrl : 'https://test.salesforce.com'
         });
-        console.log("process.env.USERNAME ",process.env.USERNAME);
-        console.log("process.env.PASSWORD ",process.env.PASSWORD);
-        const username = process.env.USERNAME || 'yourusername';
-        const password = process.env.PASSWORD || 'yourpassword+securitytoken';
+        console.log("process.env.SF_USERNAME ",process.env.SF_USERNAME);
+        console.log("process.env.SF_PASSWORD ",process.env.SF_PASSWORD);
+        const username = process.env.SF_USERNAME || 'yourusername';
+        const password = process.env.SF_PASSWORD || 'yourpassword+securitytoken';
         console.log("username",username);
         console.log("password",password);
         _this.currentConnection.login(username, password, function(err, userInfo) {

@@ -29,11 +29,15 @@
     "typescript": "^2.0.6"
   },
   "dependencies": {
+    "async": "^2.5.0",
     "body-parser": "^1.15.2",
+    "connect-flash": "^0.1.1",
     "debug": "^2.2.0",
     "dotenv": "^4.0.0",
+    "ejs": "^2.5.7",
     "express": "^4.14.0",
     "jsforce": "^1.8.0",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "underscore": "^1.8.3"
   }
 }

@@ -1,6 +1,6 @@
 const gulp = require('gulp');
 const ts = require('gulp-typescript');
-const JSON_FILES = ['src/*.json', 'src/**/*.json'];
+const STATIC_FILES = ['src/*.json', 'src/**/*.json','src/*.css', 'src/**/*.css','src/*.html', 'src/**/*.html'];
 
 // pull in the project TypeScript config
 const tsProject = ts.createProject('tsconfig.json');
@@ -16,7 +16,7 @@ gulp.task('watch', ['scripts'], () => {
 });
 
 gulp.task('assets', function() {
-  return gulp.src(JSON_FILES)
+  return gulp.src(STATIC_FILES)
   .pipe(gulp.dest('dist'));
 });
 
