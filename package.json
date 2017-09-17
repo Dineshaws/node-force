@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "gulp",
     "start": "node dist/index.js",
     "test": "mocha --reporter spec --compilers ts:ts-node/register 'test/**/*.test.ts'",
     "postinstall": "gulp default"
@@ -38,6 +39,21 @@
     "express": "^4.14.0",
     "jsforce": "^1.8.0",
     "morgan": "^1.7.0",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+     "@types/body-parser": "0.0.33",
+    "@types/chai": "^3.4.34",
+    "@types/chai-http": "0.0.29",
+    "@types/debug": "0.0.29",
+    "@types/express": "^4.0.33",
+    "@types/mocha": "^2.2.32",
+    "@types/morgan": "^1.7.32",
+    "@types/node": "^6.0.46",
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-typescript": "^3.1.1",
+    "mocha": "^3.1.2",
+    "ts-node": "^1.6.1",
+    "typescript": "^2.0.6"
   }
 }
