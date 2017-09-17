@@ -26,7 +26,7 @@ public createConnection() {
     var _this = this;
     _this.currentConnection = new jsforce.Connection({
             // you can change loginUrl to connect to sandbox or prerelease env.
-            // loginUrl : 'https://test.salesforce.com'
+             loginUrl : process.env.SF_LOGIN_SERVER
         });
         console.log("process.env.SF_USERNAME ",process.env.SF_USERNAME);
         console.log("process.env.SF_PASSWORD ",process.env.SF_PASSWORD);
